@@ -1,8 +1,36 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk">\
 <head>
   <meta charset="UTF-8" />
   <title>QUNTUM NEST | Nest 42</title>
+
+  <!-- Favicon & app icons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0d0d0d">
+
+  <!-- Canonical (replace with your real domain) -->
+  <link rel="canonical" href="https://YOUR_DOMAIN.example/">
+
+  <!-- Open Graph for rich previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="QUNTUM NEST">
+  <meta property="og:title" content="QUNTUM NEST | Nest 42">
+  <meta property="og:description" content="Секційований архів експериментів Nest 42. Доступ за паролем.">
+  <meta property="og:url" content="https://YOUR_DOMAIN.example/">
+  <meta property="og:image" content="https://YOUR_DOMAIN.example/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter card (X) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QUNTUM NEST | Nest 42">
+  <meta name="twitter:description" content="Секційований архів експериментів Nest 42. Доступ за паролем.">
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.example/og-image.jpg">
+
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -61,6 +89,8 @@
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .enter-btn:hover {
@@ -137,6 +167,7 @@
       box-shadow: 0 0 10px #ff0033;
       text-align: center;
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .file-card:hover {
@@ -176,24 +207,33 @@
   <div class="main-page" id="mainPage">
     <h2 style="color:#ccc;">Nest 42 | Архів експериментів</h2>
     <div class="file-container">
-      <div class="file-card">
-        <div class="file-title">EX-001: Біоінтерфейс</div>
-        <div class="file-status">Статус: Очікує завантаження</div>
+      <div class="file-card" onclick="window.open('ex-001.html', '_blank')">
+        <div class="file-title">EX-001: Аномалія океана</div>
+        <div class="file-status">Статус: Вивчення</div>
       </div>
-      <div class="file-card">
+      <div class="file-card" onclick="window.open('ex-002.html', '_blank')">
         <div class="file-title">EX-002: Синтетичний розум</div>
         <div class="file-status">Статус: В розробці</div>
       </div>
-      <div class="file-card">
+      <div class="file-card" onclick="window.open('ex-003.html', '_blank')">
         <div class="file-title">EX-003: Гравітаційний модуль</div>
-        <div class="file-status">Статус: Архівовано</div>
+        <div class="file-status">Статус: Архівовано та заморожено</div>
+      </div>
+      <div class="file-card" onclick="window.open('ex-004.html', '_blank')">
+        <div class="file-title">EX-004: Біо інженерія та зміна,модифікація ДНК</div>
+        <div class="file-status">Статус: Вивчення</div>
+      </div>
+      <div class="file-card" onclick="window.open('ex-005.html', '_blank')">
+        <div class="file-title">EX-005: Космічні програми</div>
+        <div class="file-status">Статус: Виконується</div>
       </div>
     </div>
   </div>
 
-  <audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+  <audio id="alarmSound_off" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+  <audio id="alarmSound_on" src="https://uc771b48abe6dac8648122b24627.dl.dropboxusercontent.com/cd/0/inline/CwlNCF9xQXhzW-RmIcnrpMKnZ_hCZRjeXrxDZ6gM6bryQ88AEGptfPmKcmVPXKY8me_gtvKug18kkWQZauLyalEVuUNWhw0jteTdBc9yslHlIBKVGhXvZZ9Tw4SkfkBr6UUW-6r8Hckuzq_56aXSNLhe/file#"></audio>
 
-  <script>
+<script>
     const correctPassword = "N42-ALPHA";
     const maxAttempts = 3;
     const lockDuration = 3 * 60 * 1000;
@@ -203,7 +243,7 @@
     function showPassword() {
       const now = Date.now();
       if (now < lockUntil) {
-        alert("Заблоковано. Спробуйте через 3 хвилини.");
+        alert("В доступі ВІДХИЛЕНО!. Спробуйте через 3 хвилини.");
         return;
       }
       document.getElementById('passwordField').style.display = 'flex';
@@ -212,35 +252,97 @@
     function checkPassword() {
       const input = document.getElementById("passwordInput").value;
       const denied = document.getElementById("deniedMessage");
-      const alarm = document.getElementById("alarmSound");
+      const alarm = document.getElementById("alarmSound_off");
+      const successSound = document.getElementById("alarmSound_on");
+
+      denied.style.display = "block";
 
       if (input === correctPassword) {
+        alarm.pause();
+        alarm.currentTime = 0;
+        successSound.play();
+
         denied.classList.remove("flash-red");
         denied.classList.add("access-granted");
         denied.textContent = "Доступ дозволено )";
         localStorage.removeItem("attempts");
         localStorage.removeItem("lockUntil");
+
         setTimeout(() => {
           document.getElementById("accessCard").classList.remove("active");
           document.getElementById("mainPage").classList.add("active");
         }, 2000);
       } else {
+        successSound.pause();
+        successSound.currentTime = 0;
+        alarm.play();
+
         attempts++;
         localStorage.setItem("attempts", attempts);
-        denied.textContent = "В доступі відмовлено";
+
         denied.classList.remove("access-granted");
         denied.classList.add("flash-red");
-        denied.style.display = "block";
-        alarm.play();
+        denied.textContent = "В доступі відмовлено (";
 
         if (attempts >= maxAttempts) {
           const lockTime = Date.now() + lockDuration;
           localStorage.setItem("lockUntil", lockTime);
-          alert("Забагато спроб. Заблоковано на 3 хвилини.");
+          alert("В доступі ВІДХИЛЕНО!. Заблоковано на 3 хвилини.");
         }
       }
     }
   </script>
+
+<script>
+// --- Simple hash router so you can share links like #archive ---
+(function() {
+  function show(idToShow) {
+    document.getElementById("accessCard").classList.remove("active");
+    document.getElementById("mainPage").classList.remove("active");
+    document.getElementById(idToShow).classList.add("active");
+  }
+
+  function renderByHash() {
+    const accessGranted = localStorage.getItem("accessGranted") === "true";
+    const hash = (location.hash || "").toLowerCase();
+
+    if (hash === "#archive") {
+      if (accessGranted) {
+        show("mainPage");
+      } else {
+        // Not yet granted: force login
+        show("accessCard");
+      }
+    } else {
+      // default route
+      show("accessCard");
+    }
+  }
+
+  window.addEventListener("hashchange", renderByHash);
+  window.addEventListener("load", renderByHash);
+
+  // Hook into password success (override existing setTimeout block)
+  const _oldCheckPassword = window.checkPassword;
+  window.checkPassword = function() {
+    const before = document.getElementById("mainPage").classList.contains("active");
+    _oldCheckPassword();
+    // Poll for access granted text change – then set flag and route
+    setTimeout(() => {
+      const denied = document.getElementById("deniedMessage");
+      if (denied && denied.classList.contains("access-granted")) {
+        localStorage.setItem("accessGranted", "true");
+        if (location.hash.toLowerCase() !== "#archive") {
+          location.hash = "#archive";
+        } else {
+          renderByHash();
+        }
+      }
+    }, 100);
+  };
+})();
+
+
+</script>
 </body>
 </html>
-
