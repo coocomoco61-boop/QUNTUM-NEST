@@ -92,8 +92,16 @@
       outline: none;
     }
 
+    .denied {
+      margin-top: 1rem;
+      color: #ff0033;
+      font-weight: bold;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -108,18 +116,57 @@
   <div class="access-card">
     <h1>Nest 42</h1>
     <div class="access-level">Рівень доступу: Засекречено</div>
-    <div class="code">Код: UNKNOWN</div>
+    <div class="code">Код: N42-ALPHA</div>
     <button class="enter-btn" onclick="showPassword()">Увійти</button>
 
     <div class="password-field" id="passwordField">
       <div class="password-label">Введіть пароль (макс. 9 символів):</div>
-      <input type="password" maxlength="9" class="password-input" placeholder="_ _ _ _ _ _ _ _ _" />
+      <input type="password" maxlength="9" class="password-input" id="passwordInput" placeholder="_ _ _ _ _ _ _ _ _" />
+      <button class="enter-btn" onclick="checkPassword()">Підтвердити</button>
+      <div class="denied" id="deniedMessage">В доступі відмовлено</div>
     </div>
   </div>
 
+  <audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+
   <script>
+    const correctPassword = "N42-ALPHA";
+    const maxAttempts = 3;
+    const lockDuration = 3 * 60 * 1000; // 3 хвилини
+    let attempts = parseInt(localStorage.getItem("attempts")) || 0;
+    let lockUntil = parseInt(localStorage.getItem("lockUntil")) || 0;
+
     function showPassword() {
+      const now = Date.now();
+      if (now < lockUntil) {
+        alert("Заблоковано. Спробуйте через 3 хвилини.");
+        return;
+      }
       document.getElementById('passwordField').style.display = 'flex';
+    }
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const denied = document.getElementById("deniedMessage");
+      const alarm = document.getElementById("alarmSound");
+
+      if (input === correctPassword) {
+        alert("Доступ дозволено!");
+        localStorage.removeItem("attempts");
+        localStorage.removeItem("lockUntil");
+        // Тут можна додати перенаправлення або ефект входу
+      } else {
+        attempts++;
+        localStorage.setItem("attempts", attempts);
+        denied.style.display = "block";
+        alarm.play();
+
+        if (attempts >= maxAttempts) {
+          const lockTime = Date.now() + lockDuration;
+          localStorage.setItem("lockUntil", lockTime);
+          alert("Забагато спроб. Заблоковано на 3 хвилини.");
+        }
+      }
     }
   </script>
 </body>
