@@ -2,8 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nest 42 | QUNTUM NEST</title>
+  <title>QUNTUM NEST | Nest 42</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -23,17 +22,21 @@
       font-size: 2.5rem;
       letter-spacing: 2px;
       margin-bottom: 1rem;
-      animation: fadeIn 2s ease-in-out;
     }
 
-    .access-card {
+    .access-card, .main-page {
       border: 2px solid #ff0033;
       padding: 2rem;
       border-radius: 12px;
       text-align: center;
       background: linear-gradient(145deg, #111, #1a1a1a);
       box-shadow: 0 0 20px #ff0033;
-      animation: slideUp 2s ease-out;
+      display: none;
+    }
+
+    .access-card.active, .main-page.active {
+      display: block;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .access-level {
@@ -94,10 +97,23 @@
 
     .denied {
       margin-top: 1rem;
-      color: #ff0033;
       font-weight: bold;
       display: none;
-      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes flashRed {
+      0% { color: #660000; }
+      50% { color: #ff6666; }
+      100% { color: #660000; }
+    }
+
+    .flash-red {
+      animation: flashRed 1s ease-in-out infinite;
+    }
+
+    .access-granted {
+      color: #66ff99;
+      animation: fadeIn 1s ease-in-out;
     }
 
     @keyframes fadeIn {
@@ -105,25 +121,73 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+    .file-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      width: 80%;
+    }
+
+    .file-card {
+      border: 2px solid #ff0033;
+      border-radius: 12px;
+      padding: 1rem;
+      background: linear-gradient(145deg, #111, #1a1a1a);
+      box-shadow: 0 0 10px #ff0033;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .file-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff0033;
+    }
+
+    .file-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #ccc;
+    }
+
+    .file-status {
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <div class="logo">QUNTUM NEST</div>
-  <div class="access-card">
+
+  <div class="access-card active" id="accessCard">
     <h1>Nest 42</h1>
     <div class="access-level">Рівень доступу: Засекречено</div>
-    <div class="code">Код: UNKNOWN😢</div>
+    <div class="code">Код: N42-ALPHA</div>
     <button class="enter-btn" onclick="showPassword()">Увійти</button>
 
     <div class="password-field" id="passwordField">
-      <div class="password-label">Введіть пароль (макс. 9 символів):</div>
+      <div class="password-label">Введіть пароль:</div>
       <input type="password" maxlength="9" class="password-input" id="passwordInput" placeholder="_ _ _ _ _ _ _ _ _" />
       <button class="enter-btn" onclick="checkPassword()">Підтвердити</button>
       <div class="denied" id="deniedMessage">В доступі відмовлено</div>
+    </div>
+  </div>
+
+  <div class="main-page" id="mainPage">
+    <h2 style="color:#ccc;">Nest 42 | Архів експериментів</h2>
+    <div class="file-container">
+      <div class="file-card">
+        <div class="file-title">EX-001: Біоінтерфейс</div>
+        <div class="file-status">Статус: Очікує завантаження</div>
+      </div>
+      <div class="file-card">
+        <div class="file-title">EX-002: Синтетичний розум</div>
+        <div class="file-status">Статус: В розробці</div>
+      </div>
+      <div class="file-card">
+        <div class="file-title">EX-003: Гравітаційний модуль</div>
+        <div class="file-status">Статус: Архівовано</div>
+      </div>
     </div>
   </div>
 
@@ -132,7 +196,7 @@
   <script>
     const correctPassword = "N42-ALPHA";
     const maxAttempts = 3;
-    const lockDuration = 3 * 60 * 1000; // 3 хвилини
+    const lockDuration = 3 * 60 * 1000;
     let attempts = parseInt(localStorage.getItem("attempts")) || 0;
     let lockUntil = parseInt(localStorage.getItem("lockUntil")) || 0;
 
@@ -151,13 +215,21 @@
       const alarm = document.getElementById("alarmSound");
 
       if (input === correctPassword) {
-        alert("Доступ дозволено!");
+        denied.classList.remove("flash-red");
+        denied.classList.add("access-granted");
+        denied.textContent = "Доступ дозволено )";
         localStorage.removeItem("attempts");
         localStorage.removeItem("lockUntil");
-        // Тут можна додати перенаправлення або ефект входу
+        setTimeout(() => {
+          document.getElementById("accessCard").classList.remove("active");
+          document.getElementById("mainPage").classList.add("active");
+        }, 2000);
       } else {
         attempts++;
         localStorage.setItem("attempts", attempts);
+        denied.textContent = "В доступі відмовлено";
+        denied.classList.remove("access-granted");
+        denied.classList.add("flash-red");
         denied.style.display = "block";
         alarm.play();
 
@@ -171,3 +243,4 @@
   </script>
 </body>
 </html>
+
