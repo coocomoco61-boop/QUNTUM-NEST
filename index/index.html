@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nest 42 | QUNTUM NEST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      color: #00ffe7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .access-card {
+      border: 2px solid #00ffe7;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      background: linear-gradient(145deg, #111, #1a1a1a);
+      box-shadow: 0 0 20px #00ffe7;
+      animation: slideUp 2s ease-out;
+    }
+
+    .access-level {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #ccc;
+    }
+
+    .code {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .enter-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background-color: transparent;
+      border: 2px solid #00ffe7;
+      color: #00ffe7;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .enter-btn:hover {
+      background-color: #00ffe7;
+      color: #0d0d0d;
+      box-shadow: 0 0 10px #00ffe7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">QUNTUM NEST</div>
+  <div class="access-card">
+    <h1>NEST 42</h1>
+    <div class="access-level">Access Level: Classified</div>
+    <div class="code">Code: N42-ALPHA</div>
+    <button class="enter-btn">Enter Nest</button>
+  </div>
+</body>
+</html>
