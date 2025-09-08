@@ -33,6 +33,42 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
+  .archive-entry {
+  background: #0f0f0f;
+  color: #e0e0e0;
+  border: 2px solid #42f4c5;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 20px #42f4c5;
+}
+
+.entry-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #42f4c5;
+  text-transform: uppercase;
+}
+
+.entry-content p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.entry-image {
+  display: block;
+  max-width: 100%;
+  margin: 20px 0;
+  border: 1px solid #42f4c5;
+}
+
+.entry-media {
+  width: 100%;
+  margin: 20px 0;
+  background: #1a1a1a;
+  border: 1px solid #42f4c5;
+}
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
@@ -184,7 +220,60 @@
     .file-status {
       font-size: 0.9rem;
       color: #666;
-    }
+    .archive-entry {
+  background: #0f0f0f;
+  color: #e0e0e0;
+  border: 2px solid #42f4c5;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 20px #42f4c5;
+}
+
+.entry-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #42f4c5;
+  text-transform: uppercase;
+}
+
+.entry-content p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.entry-image {
+  display: block;
+  max-width: 100%;
+  margin: 20px 0;
+  border: 1px solid #42f4c5;
+}
+
+.entry-media {
+  width: 100%;
+  margin: 20px 0;
+  background: #1a1a1a;
+  border: 1px solid #42f4c5;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+}
+
+.file-list li {
+  margin: 10px 0;
+}
+
+.file-list a {
+  color: #42f4c5;
+  text-decoration: none;
+}
+
+.file-list a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -204,36 +293,110 @@
       <div class="denied" id="deniedMessage">В доступі відмовлено</div>
     </div>
   </div>
-
-  <div class="main-page" id="mainPage">
-    <h2 style="color:#ccc;">Nest 42 | Архів експериментів</h2>
-    <div class="file-container">
-      <div class="file-card" onclick="window.open('ex-001.html', '_blank')">
-        <div class="file-title">EX-001: Аномалія океана</div>
-        <div class="file-status">Статус: Вивчення</div>
-      </div>
-      <div class="file-card" onclick="window.open('ex-002.html', '_blank')">
-        <div class="file-title">EX-002: Синтетичний розум</div>
-        <div class="file-status">Статус: В розробці</div>
-      </div>
-      <div class="file-card" onclick="window.open('ex-003.html', '_blank')">
-        <div class="file-title">EX-003: Гравітаційний модуль</div>
-        <div class="file-status">Статус: Архівовано та заморожено</div>
-      </div>
-      <div class="file-card" onclick="window.open('ex-004.html', '_blank')">
-        <div class="file-title">EX-004: Біо інженерія та зміна,модифікація ДНК</div>
-        <div class="file-status">Статус: Вивчення</div>
-      </div>
-      <div class="file-card" onclick="window.open('ex-005.html', '_blank')">
-        <div class="file-title">EX-005: Космічні програми</div>
-        <div class="file-status">Статус: Виконується</div>
-      </div>
-      <div class="file-card" onclick="window.open('ex-006.html', '_blank')">
-        <div class="file-title">EX-006: Бомбо сховища</div>
-        <div class="file-status">Статус: В розробці</div>
-      </div>
-
+   <div class="main-page" id="mainPage">
+  <h2 style="color:#ccc;">Nest 42 | Архів експериментів</h2>
+  <div class="file-container">
+    <div class="file-card" onclick="location.hash='#exp001'">
+      <div class="file-title">EX-001: Аномалія океана</div>
+      <div class="file-status">Статус: Вивчення</div>
     </div>
+    <div class="file-card" onclick="location.hash='#exp002'">
+      <div class="file-title">EX-002: Синтетичний розум</div>
+      <div class="file-status">Статус: В розробці</div>
+    </div>
+    <div class="file-card" onclick="location.hash='#exp003'">
+      <div class="file-title">EX-003: Гравітаційний модуль</div>
+      <div class="file-status">Статус: Архівовано та заморожено</div>
+    </div>
+    <div class="file-card" onclick="location.hash='#exp004'">
+      <div class="file-title">EX-004: Біо інженерія та модифікація ДНК</div>
+      <div class="file-status">Статус: Вивчення</div>
+    </div>
+    <div class="file-card" onclick="location.hash='#exp005'">
+      <div class="file-title">EX-005: Космічні програми</div>
+      <div class="file-status">Статус: Виконується</div>
+    </div>
+    <div class="file-card" onclick="location.hash='#exp006'">
+      <div class="file-title">EX-006: Бомбо сховища</div>
+      <div class="file-status">Статус: В розробці</div>
+    </div>
+  </div>
+</div>
+    <!-- Деталі експерименту 001 -->
+<div id="exp001" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 001 — Аномалія океана</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 001...</p>
+      <img src="images/photo001.jpg" alt="Фото експерименту" class="entry-image">
+      <video controls class="entry-media">
+        <source src="media/video001.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+
+<!-- Деталі експерименту 002 -->
+<div id="exp002" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 002 — Синтетичний розум</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 002...</p>
+      <audio controls class="entry-media">
+        <source src="media/audio002.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+
+<!-- Деталі експерименту 003 -->
+<div id="exp003" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 003 — Гравітаційний модуль</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 003...</p>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+
+<!-- Деталі експерименту 004 -->
+<div id="exp004" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 004 — Біо інженерія та модифікація ДНК</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 004...</p>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+
+<!-- Деталі експерименту 005 -->
+<div id="exp005" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 005 — Космічні програми</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 005...</p>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+
+<!-- Деталі експерименту 006 -->
+<div id="exp006" class="page experiment-details" style="display:none;">
+  <div class="archive-entry">
+    <h2 class="entry-title">🧬 Експеримент 006 — Бомбо сховища</h2>
+    <div class="entry-content">
+      <p>Опис експерименту 006...</p>
+    </div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
+  </div>
+  <button onclick="backToArchive()">⬅ Повернутись до архіву</button>
+</div>
   </div>
 
   <audio id="alarmSound_off" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
@@ -288,20 +451,20 @@ function checkPassword() {
             ? successSound.duration * 1000
             : 2500;
           setTimeout(() => {
-            location.hash = "#archive";
+           showExperiment('exp001') 
           }, delay);
         })
         .catch(err => {
           console.warn("Звук успіху не програвся:", err);
           // Якщо звук не програвся — просто чекаємо 2.5 сек
           setTimeout(() => {
-            location.hash = "#archive";
+            showExperiment('exp001');
           }, 2500);
         });
     } else {
       // Якщо елемента немає — просто чекаємо
       setTimeout(() => {
-        location.hash = "#archive";
+        showExperiment('exp001');
       }, 2500);
     }
 
@@ -334,7 +497,6 @@ function checkPassword() {
 
 
     document.addEventListener('DOMContentLoaded', () => {
-      const passwordInput = document.getElementById("passwordInput");
       if (passwordInput) {
         passwordInput.addEventListener("keydown", function(event) {
           // Перевірка: Enter + поле видиме + не порожнє
@@ -361,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).classList.add("active");
   }
 
-  function renderByHash() {
+   {
     const hash = window.location.hash;
     const accessGranted = localStorage.getItem("accessGranted") === "true";
 
@@ -370,8 +532,11 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("В доступі ВІДХИЛЕНО! Спробуйте пізніше.");
         show("accessCard");
         return;
-      }
-
+       }
+       if (hash.startsWith("#exp")) {
+    showExperiment(hash.substring(1));
+    return;
+   }
       if (accessGranted) {
         show("mainPage");
       } else {
@@ -381,40 +546,18 @@ document.addEventListener("DOMContentLoaded", () => {
       show("mainPage");
     }
   }
-
-  window.addEventListener("hashchange", renderByHash);
-  renderByHash();
 });
 </script>
 
 <script>
 // --- Simple hash router so you can share links like #archive ---
 (function() {
-  function show(idToShow) {
+ {
     document.getElementById("accessCard").classList.remove("active");
     document.getElementById("mainPage").classList.remove("active");
     document.getElementById(idToShow).classList.add("active");
   }
 
-  function renderByHash() {
-    const accessGranted = localStorage.getItem("accessGranted") === "true";
-    const hash = (location.hash || "").toLowerCase();
-
-    if (hash === "#archive") {
-      if (accessGranted) {
-        show("mainPage");
-      } else {
-        // Not yet granted: force login
-        show("accessCard");
-      }
-    } else {
-      // default route
-      show("accessCard");
-    }
-  }
-
-  window.addEventListener("hashchange", renderByHash);
-  window.addEventListener("load", renderByHash);
 
   // Hook into password success (override existing setTimeout block)
   const _oldCheckPassword = window.checkPassword;
@@ -427,9 +570,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (denied && denied.classList.contains("access-granted")) {
         localStorage.setItem("accessGranted", "true");
         if (location.hash.toLowerCase() !== "#archive") {
-          location.hash = "#archive";
+          show("mainPage");
         } else {
-          renderByHash();
+          
         }
       }
     }, 100);
@@ -437,6 +580,32 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
+</script>
+<script>
+function show(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function showExperiment(id) {
+  document.getElementById('mainPage').style.display = 'none';
+  document.querySelectorAll('.experiment-details').forEach(el => el.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
+
+function backToArchive() {
+  document.querySelectorAll('.experiment-details').forEach(el => el.style.display = 'none');
+  document.getElementById('mainPage').style.display = 'block';
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const accessGranted = localStorage.getItem("accessGranted") === "true";
+  if (accessGranted) {
+    show("mainPage");
+  } else {
+    show("accessCard");
+  }
+});
 </script>
 </body>
 </html>
