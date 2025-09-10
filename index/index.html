@@ -43,6 +43,9 @@
   font-family: 'Orbitron', sans-serif;
   box-shadow: 0 0 20px #42f4c5;
 }
+.page {
+  display: none;
+}
 
 .entry-title {
   font-size: 24px;
@@ -296,34 +299,34 @@
    <div class="main-page" id="mainPage">
   <h2 style="color:#ccc;">Nest 42 | Архів експериментів</h2>
   <div class="file-container">
-    <div class="file-card" onclick="location.hash='#exp001'">
+    <div class="file-card" onclick="showExperiment('exp001')">
       <div class="file-title">EX-001: Аномалія океана</div>
       <div class="file-status">Статус: Вивчення</div>
     </div>
-    <div class="file-card" onclick="location.hash='#exp002'">
+    <div class="file-card" onclick="showExperiment('exp002')">
       <div class="file-title">EX-002: Синтетичний розум</div>
       <div class="file-status">Статус: В розробці</div>
     </div>
-    <div class="file-card" onclick="location.hash='#exp003'">
+    <div class="file-card" onclick="showExperiment('exp003')">
       <div class="file-title">EX-003: Гравітаційний модуль</div>
       <div class="file-status">Статус: Архівовано та заморожено</div>
     </div>
-    <div class="file-card" onclick="location.hash='#exp004'">
+    <div class="file-card" onclick="showExperiment('exp004')">
       <div class="file-title">EX-004: Біо інженерія та модифікація ДНК</div>
       <div class="file-status">Статус: Вивчення</div>
     </div>
-    <div class="file-card" onclick="location.hash='#exp005'">
+    <div class="file-card" onclick="showExperiment('exp005')">
       <div class="file-title">EX-005: Космічні програми</div>
       <div class="file-status">Статус: Виконується</div>
     </div>
-    <div class="file-card" onclick="location.hash='#exp006'">
+    <div class="file-card" onclick="showExperiment('exp006')">
       <div class="file-title">EX-006: Бомбо сховища</div>
       <div class="file-status">Статус: В розробці</div>
     </div>
   </div>
 </div>
     <!-- Деталі експерименту 001 -->
-<div id="exp001" class="page experiment-details" style="display:none;">
+<div id="exp001" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 001 — Аномалія океана</h2>
     <div class="entry-content">
@@ -338,7 +341,7 @@
 </div>
 
 <!-- Деталі експерименту 002 -->
-<div id="exp002" class="page experiment-details" style="display:none;">
+<div id="exp002" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 002 — Синтетичний розум</h2>
     <div class="entry-content">
@@ -352,7 +355,7 @@
 </div>
 
 <!-- Деталі експерименту 003 -->
-<div id="exp003" class="page experiment-details" style="display:none;">
+<div id="exp003" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 003 — Гравітаційний модуль</h2>
     <div class="entry-content">
@@ -363,7 +366,7 @@
 </div>
 
 <!-- Деталі експерименту 004 -->
-<div id="exp004" class="page experiment-details" style="display:none;">
+<div id="exp004" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 004 — Біо інженерія та модифікація ДНК</h2>
     <div class="entry-content">
@@ -374,7 +377,7 @@
 </div>
 
 <!-- Деталі експерименту 005 -->
-<div id="exp005" class="page experiment-details" style="display:none;">
+<div id="exp005" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 005 — Космічні програми</h2>
     <div class="entry-content">
@@ -385,7 +388,7 @@
 </div>
 
 <!-- Деталі експерименту 006 -->
-<div id="exp006" class="page experiment-details" style="display:none;">
+<div id="exp006" class="page experiment-details";>
   <div class="archive-entry">
     <h2 class="entry-title">🧬 Експеримент 006 — Бомбо сховища</h2>
     <div class="entry-content">
@@ -465,7 +468,7 @@ function checkPassword() {
       // Якщо елемента немає — просто чекаємо
       setTimeout(() => {
         showExperiment('exp001');
-      }, 2500);
+      }, 2000);
     }
 
   } else {
@@ -569,10 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const denied = document.getElementById("deniedMessage");
       if (denied && denied.classList.contains("access-granted")) {
         localStorage.setItem("accessGranted", "true");
-        if (location.hash.toLowerCase() !== "#archive") {
-          show("mainPage");
-        } else {
-          
+        show("mainPage");
         }
       }
     }, 100);
@@ -583,8 +583,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script>
 function show(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "block";
 }
 
 function showExperiment(id) {
